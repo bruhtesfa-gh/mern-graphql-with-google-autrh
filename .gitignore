@@ -2,3 +2,4 @@
 /server/.env
 
 /clinet/node_modules
+/clinet/.env
