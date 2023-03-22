@@ -1,5 +1,5 @@
 /server/node_modules
 /server/.env
 
-/clinet/node_modules
-/clinet/.env
+/client/node_modules
+/client/.env
