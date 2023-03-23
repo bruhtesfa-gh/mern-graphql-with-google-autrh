@@ -1,23 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
-
+import { useGoogleOneTapLogin } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
+import { hasGrantedAllScopesGoogle } from '@react-oauth/google';
 function App() {
+
+  const login = useGoogleLogin({
+    onSuccess: tokenResponse => {
+      const hasAccess = hasGrantedAllScopesGoogle(
+        tokenResponse,
+        'https://www.googleapis.com/auth/userinfo.email',
+        'https://www.googleapis.com/auth/userinfo.profile',
+      );
+      console.log(hasAccess)
+    },
+  });
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <GoogleLogin
+        onSuccess={credentialResponse => {
+          console.log(credentialResponse);
+        }}
+        onError={() => {
+          console.log('Login Failed');
+        }}
+      />
+      <button onClick={login}>Login</button>
     </div>
   );
 }
