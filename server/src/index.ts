@@ -66,7 +66,7 @@ const app = express();
 server.start().then((result) => {
   server.applyMiddleware({ app });
 }).catch((err) => {
-
+  console.log(`some error occured ${err}`)
 });
 
 mongoose.connect(process.env.MONGO_URL || '').then(() => {
